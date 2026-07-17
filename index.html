@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#075E54" />
+  <meta name="theme-color" content="#12293F" />
   <meta name="description" content="Portal de autoatendimento do motorista — Grupo GBS" />
   <title>Portal do Motorista — Grupo GBS</title>
   <link rel="manifest" href="manifest.webmanifest" />
@@ -13,12 +13,31 @@
 </head>
 <body>
 
+  <!-- Ícones Lucide (sprite inline) -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <symbol id="i-bus" viewBox="0 0 24 24"><path d="M4 6 2 7"/><path d="M10 6h4"/><path d="m22 7-2-1"/><rect width="16" height="16" x="4" y="3" rx="2"/><path d="M4 11h16"/><path d="M8 15h.01"/><path d="M16 15h.01"/><path d="M6 19v2"/><path d="M18 21v-2"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
+    <symbol id="i-bot" viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+  </svg>
+
   <!-- ============ TELA: LOGIN ============ -->
   <section id="screen-login" class="screen screen-login" hidden>
     <div class="login-box">
-      <div class="login-logo" aria-hidden="true">🚌</div>
+      <div class="login-logo" aria-hidden="true">
+        <svg class="icon"><use href="#i-bus"/></svg>
+      </div>
       <h1 class="login-title">Portal do Motorista</h1>
-      <p class="login-subtitle">Grupo GBS</p>
+      <p class="login-subtitle">GRUPO GBS</p>
 
       <form id="login-form" autocomplete="off">
         <label class="field">
@@ -34,14 +53,14 @@
         </label>
 
         <div id="login-error" class="login-error" role="alert" hidden>
-          ⚠️ Matrícula ou senha inválida.<br />Verifique e tente novamente.
+          Matrícula ou senha inválida.<br />Verifique e tente novamente.
         </div>
 
         <button type="submit" class="btn-primary btn-big">Entrar</button>
       </form>
 
       <p class="login-hint">Acesso restrito a motoristas cadastrados.<br />
-        <small>Demo: matrícula <b>12345</b> · senha <b>1234</b></small>
+        <small>Demonstração: matrícula <b>12345</b> · senha <b>1234</b></small>
       </p>
     </div>
   </section>
@@ -50,35 +69,40 @@
   <section id="screen-home" class="screen screen-home" hidden>
     <header class="home-header">
       <div>
-        <p class="home-greeting" id="home-greeting">Olá! 👋</p>
-        <p class="home-sub">O que você precisa hoje?</p>
+        <p class="home-greeting" id="home-greeting">Olá</p>
+        <p class="home-sub">Como podemos ajudar hoje?</p>
       </div>
-      <button id="btn-logout" class="btn-icon" title="Sair" aria-label="Sair da conta">🚪</button>
+      <button id="btn-logout" class="btn-icon" title="Sair" aria-label="Sair da conta">
+        <svg class="icon"><use href="#i-logout"/></svg>
+      </button>
     </header>
 
     <main class="home-cards" role="navigation" aria-label="Serviços">
       <button class="card card-contatos" data-flow="contatos">
-        <span class="card-icon" aria-hidden="true">📞</span>
+        <span class="card-icon" aria-hidden="true"><svg class="icon"><use href="#i-phone"/></svg></span>
         <span class="card-text">
           <span class="card-title">Contatos</span>
           <span class="card-desc">Escalas e Departamento Pessoal</span>
         </span>
+        <svg class="icon card-chevron" aria-hidden="true"><use href="#i-chevron-right"/></svg>
       </button>
 
       <button class="card card-pane" data-flow="pane">
-        <span class="card-icon" aria-hidden="true">🚨</span>
+        <span class="card-icon" aria-hidden="true"><svg class="icon"><use href="#i-alert"/></svg></span>
         <span class="card-text">
           <span class="card-title">Pane</span>
           <span class="card-desc">Problema com o veículo agora</span>
         </span>
+        <svg class="icon card-chevron" aria-hidden="true"><use href="#i-chevron-right"/></svg>
       </button>
 
       <button class="card card-os" data-flow="os">
-        <span class="card-icon" aria-hidden="true">🛠️</span>
+        <span class="card-icon" aria-hidden="true"><svg class="icon"><use href="#i-wrench"/></svg></span>
         <span class="card-text">
           <span class="card-title">Abrir OS</span>
           <span class="card-desc">Registrar defeito do veículo</span>
         </span>
+        <svg class="icon card-chevron" aria-hidden="true"><use href="#i-chevron-right"/></svg>
       </button>
     </main>
   </section>
@@ -87,7 +111,7 @@
   <section id="screen-perfil" class="screen screen-simple" hidden>
     <header class="simple-header"><h2>Perfil</h2></header>
     <main class="simple-body">
-      <div class="avatar-big" aria-hidden="true">👤</div>
+      <div class="avatar-big" aria-hidden="true"><svg class="icon"><use href="#i-user"/></svg></div>
       <p class="profile-name" id="perfil-nome">—</p>
       <p class="profile-mat" id="perfil-matricula">—</p>
       <p class="placeholder-note">Mais opções de perfil em breve.</p>
@@ -99,7 +123,7 @@
   <section id="screen-config" class="screen screen-simple" hidden>
     <header class="simple-header"><h2>Configurações</h2></header>
     <main class="simple-body">
-      <div class="avatar-big" aria-hidden="true">⚙️</div>
+      <div class="avatar-big" aria-hidden="true"><svg class="icon"><use href="#i-settings"/></svg></div>
       <p class="placeholder-note">Configurações disponíveis em breve.</p>
     </main>
   </section>
@@ -107,11 +131,16 @@
   <!-- ============ TELA: CHAT ============ -->
   <section id="screen-chat" class="screen screen-chat" hidden>
     <header class="chat-header">
-      <button id="chat-back" class="btn-icon chat-back" aria-label="Voltar ao menu">←</button>
-      <div class="chat-avatar" aria-hidden="true">🤖</div>
+      <button id="chat-back" class="btn-icon chat-back" aria-label="Voltar ao menu">
+        <svg class="icon"><use href="#i-arrow-left"/></svg>
+      </button>
+      <div class="chat-avatar" aria-hidden="true"><svg class="icon"><use href="#i-bot"/></svg></div>
       <div class="chat-headtext">
         <p class="chat-title" id="chat-title">Assistente GBS</p>
-        <p class="chat-status"><span class="badge-biz" aria-hidden="true">✔</span> Conta comercial · online</p>
+        <p class="chat-status">
+          <span class="badge-biz" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>
+          Conta comercial · online
+        </p>
       </div>
     </header>
 
@@ -123,7 +152,9 @@
       <form id="chat-form" class="chat-inputbar" autocomplete="off">
         <input id="chat-input" type="text" placeholder="Digite uma mensagem"
                aria-label="Mensagem" />
-        <button type="submit" class="chat-send" aria-label="Enviar">➤</button>
+        <button type="submit" class="chat-send" aria-label="Enviar">
+          <svg class="icon"><use href="#i-send"/></svg>
+        </button>
       </form>
       <input id="chat-photo-input" type="file" accept="image/*" capture="environment" hidden />
       <p class="chat-hint">Digite <b>sair</b> para voltar uma etapa</p>
@@ -133,13 +164,13 @@
   <!-- ============ NAVEGAÇÃO INFERIOR ============ -->
   <nav id="bottom-nav" class="bottom-nav" hidden aria-label="Navegação principal">
     <button class="nav-item active" data-screen="home">
-      <span class="nav-icon" aria-hidden="true">🏠</span><span>Home</span>
+      <svg class="icon nav-icon" aria-hidden="true"><use href="#i-home"/></svg><span>Home</span>
     </button>
     <button class="nav-item" data-screen="perfil">
-      <span class="nav-icon" aria-hidden="true">👤</span><span>Perfil</span>
+      <svg class="icon nav-icon" aria-hidden="true"><use href="#i-user"/></svg><span>Perfil</span>
     </button>
     <button class="nav-item" data-screen="config">
-      <span class="nav-icon" aria-hidden="true">⚙️</span><span>Config.</span>
+      <svg class="icon nav-icon" aria-hidden="true"><use href="#i-settings"/></svg><span>Ajustes</span>
     </button>
   </nav>
 

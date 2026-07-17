@@ -1,13 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="96" fill="#075E54"/>
-  <g>
-    <rect x="96" y="128" width="320" height="224" rx="36" fill="#25D366"/>
-    <rect x="128" y="160" width="112" height="80" rx="12" fill="#E5F9EE"/>
-    <rect x="272" y="160" width="112" height="80" rx="12" fill="#E5F9EE"/>
-    <rect x="96" y="272" width="320" height="80" rx="24" fill="#128C7E"/>
-    <circle cx="168" cy="368" r="40" fill="#111B21"/>
-    <circle cx="168" cy="368" r="18" fill="#90A4AE"/>
-    <circle cx="344" cy="368" r="40" fill="#111B21"/>
-    <circle cx="344" cy="368" r="18" fill="#90A4AE"/>
+  <rect width="512" height="512" rx="96" fill="#12293F"/>
+  <g fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" transform="translate(96 96) scale(13.33)">
+    <path d="M4 6 2 7"/>
+    <path d="M10 6h4"/>
+    <path d="m22 7-2-1"/>
+    <rect width="16" height="16" x="4" y="3" rx="2"/>
+    <path d="M4 11h16"/>
+    <path d="M8 15h.01"/>
+    <path d="M16 15h.01"/>
+    <path d="M6 19v2"/>
+    <path d="M18 21v-2"/>
   </g>
 </svg>

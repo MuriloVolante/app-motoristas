@@ -89,16 +89,16 @@ const Chat = {
 
     if (step.tipo === "fim") {
       this.setInputEnabled(false);
-      this.addOptionButton({ label: "🏠 Voltar ao menu", wide: true }, () => this.exit());
+      this.addOptionButton({ label: "Voltar ao menu", wide: true }, () => this.exit());
       return;
     }
 
     if (step.tipo === "foto") {
       this.setInputEnabled(false);
-      this.addOptionButton({ label: "📷 Tirar / anexar foto", wide: true }, () => {
+      this.addOptionButton({ label: "Tirar / anexar foto", wide: true }, () => {
         this.els.photoInput.click();
       });
-      this.addOptionButton({ label: "↩️ Voltar" }, () => this.goBack());
+      this.addOptionButton({ label: "Voltar" }, () => this.goBack());
       return;
     }
 
@@ -139,7 +139,7 @@ const Chat = {
     }
 
     if (step.tipo !== "texto") {
-      this.botSay(["Por favor, use os botões acima para responder. 😊\n(Ou digite *sair* para voltar.)"], () => this.presentInput(step));
+      this.botSay(["Por favor, use os botões acima para responder.\n(Ou digite *sair* para voltar.)"], () => this.presentInput(step));
       return;
     }
 
@@ -168,14 +168,14 @@ const Chat = {
     this.els.options.innerHTML = "";
     if (this.history.length === 0) {
       // Na primeira etapa, "sair" cancela o fluxo
-      this.botSay(["Tudo bem, fluxo cancelado. ❌\nVoltando ao menu principal…"], () => {
+      this.botSay(["Tudo bem, atendimento cancelado.\nVoltando ao menu principal…"], () => {
         setTimeout(() => this.exit(), 900);
       });
       return;
     }
     const prevId = this.history.pop();
     this.currentStepId = prevId;
-    this.botSay(["Ok, voltando uma etapa. ⤴️"], () => this.showStep2(prevId));
+    this.botSay(["Certo, voltando uma etapa."], () => this.showStep2(prevId));
   },
 
   // Reapresenta a etapa sem executar aoEntrar de novo
@@ -266,7 +266,8 @@ function escapeHtml(s) {
 // *negrito* estilo WhatsApp + links de telefone [tel:...|(44) 0000-0000]
 function formatMsg(s) {
   let html = escapeHtml(s);
-  html = html.replace(/\[tel:([^|]+)\|([^\]]+)\]/g, '<a class="tel-link" href="tel:$1">📞 $2</a>');
+  html = html.replace(/\[tel:([^|]+)\|([^\]]+)\]/g,
+    '<a class="tel-link" href="tel:$1"><svg class="icon" style="width:18px;height:18px;vertical-align:-3px"><use href="#i-phone"/></svg> $2</a>');
   html = html.replace(/\*([^*\n]+)\*/g, "<b>$1</b>");
   return html;
 }

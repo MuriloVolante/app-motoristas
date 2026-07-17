@@ -1,6 +1,6 @@
 /* Service Worker — cache do app shell (PWA offline-first) */
 
-const CACHE = "portal-gbs-v1";
+const CACHE = "portal-gbs-v2";
 
 const ASSETS = [
   "./",

@@ -70,7 +70,7 @@ const App = {
 
     if (name === "home" && this.usuario) {
       document.getElementById("home-greeting").textContent =
-        `${saudacao()}, ${primeiroNome(this.usuario.nome)}! 👋`;
+        `${saudacao()}, ${primeiroNome(this.usuario.nome)}`;
     }
     if (name === "perfil" && this.usuario) {
       document.getElementById("perfil-nome").textContent = this.usuario.nome;
