@@ -215,9 +215,11 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 .card-desc { display: block; font-size: 15px; opacity: .85; margin-top: 2px; }
 .card-chevron { opacity: .6; }
 
-.card-contatos { background: var(--blue-600); }
-.card-pane { background: var(--red-700); }
-.card-os { background: var(--green-700); }
+/* Cores dos cards — o backend informa a cor de cada fluxo (campo "cor") */
+.card-azul { background: var(--blue-600); }
+.card-vermelho { background: var(--red-700); }
+.card-verde { background: var(--green-700); }
+.card-navy { background: var(--navy-700); }
 
 /* ============ TELAS SIMPLES (Perfil/Config) ============ */
 .screen-simple { padding-bottom: calc(var(--nav-h) + 12px); }

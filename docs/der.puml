@@ -1,0 +1,142 @@
+@startuml
+' ==========================================================================
+' Portal do Motorista — Grupo GBS
+' Diagrama Entidade-Relacionamento (DER)
+' Cole em https://www.plantuml.com/plantuml ou editor compatível
+' ==========================================================================
+title Portal do Motorista — Grupo GBS · Modelo de Dados
+hide circle
+skinparam linetype ortho
+
+entity "usuarios" as usuarios {
+  * id : INTEGER <<PK, autoincremento>>
+  --
+  * matricula : TEXT <<UNIQUE>>
+  * nome : TEXT
+  * papel : TEXT <<'motorista' | 'admin'>>
+  * ativo : INTEGER <<0/1, padrão 1>>
+  * criado_em : TEXT <<datetime, padrão now>>
+  ultimo_login_em : TEXT <<datetime>>
+}
+
+entity "sessoes" as sessoes {
+  * id : INTEGER <<PK, autoincremento>>
+  --
+  * usuario_id : INTEGER <<FK -> usuarios.id>>
+  * token_hash : TEXT <<UNIQUE, SHA-256 do JWT>>
+  ip : TEXT
+  user_agent : TEXT
+  * criada_em : TEXT <<datetime, padrão now>>
+  * expira_em : TEXT <<datetime>>
+  revogada_em : TEXT <<datetime, NULL = ativa>>
+}
+
+entity "veiculos" as veiculos {
+  * id : INTEGER <<PK, autoincremento>>
+  --
+  * prefixo : TEXT <<UNIQUE>>
+  * placa : TEXT <<UNIQUE>>
+  * ativo : INTEGER <<0/1, padrão 1>>
+}
+
+entity "contatos" as contatos {
+  * id : INTEGER <<PK, autoincremento>>
+  --
+  * setor : TEXT <<'escalas' | 'dp' | 'sam'>>
+  regiao : TEXT <<NULL p/ setores sem regional>>
+  * telefone : TEXT
+  horario : TEXT
+  * ativo : INTEGER <<0/1, padrão 1>>
+}
+
+entity "conversas" as conversas {
+  * id : INTEGER <<PK, autoincremento>>
+  --
+  * usuario_id : INTEGER <<FK -> usuarios.id>>
+  * fluxo : TEXT <<id do fluxo (arquivo em server/flows)>>
+  etapa_atual : TEXT
+  * estado : TEXT <<JSON com respostas coletadas>>
+  * status : TEXT <<'ativa' | 'concluida' | 'cancelada'>>
+  * iniciada_em : TEXT <<datetime, padrão now>>
+  finalizada_em : TEXT <<datetime>>
+}
+
+entity "mensagens" as mensagens {
+  * id : INTEGER <<PK, autoincremento>>
+  --
+  * conversa_id : INTEGER <<FK -> conversas.id>>
+  * autor : TEXT <<'bot' | 'usuario'>>
+  * tipo : TEXT <<'texto' | 'opcao' | 'foto' | 'sistema'>>
+  * conteudo : TEXT
+  etapa : TEXT <<etapa do fluxo no momento>>
+  * criada_em : TEXT <<datetime, padrão now>>
+  --
+  <i>append-only: triggers bloqueiam UPDATE/DELETE</i>
+}
+
+entity "fotos" as fotos {
+  * id : INTEGER <<PK, autoincremento>>
+  --
+  * mensagem_id : INTEGER <<FK -> mensagens.id>>
+  os_id : INTEGER <<FK -> ordens_servico.id, NULL>>
+  * caminho : TEXT <<arquivo no armazenamento>>
+  nome_original : TEXT
+  * mime : TEXT
+  * tamanho_bytes : INTEGER
+  * sha256 : TEXT <<hash de integridade do arquivo>>
+  * enviada_em : TEXT <<datetime, padrão now>>
+}
+
+entity "ordens_servico" as os {
+  * id : INTEGER <<PK, autoincremento>>
+  --
+  * numero : INTEGER <<UNIQUE, sequencial visível>>
+  * conversa_id : INTEGER <<FK -> conversas.id>>
+  * usuario_id : INTEGER <<FK -> usuarios.id>>
+  veiculo_id : INTEGER <<FK -> veiculos.id, NULL>>
+  * km : INTEGER
+  * tipo_defeito : TEXT
+  * descricao : TEXT
+  observacao : TEXT
+  * criada_em : TEXT <<datetime, padrão now>>
+}
+
+entity "auditoria" as auditoria {
+  * id : INTEGER <<PK, autoincremento>>
+  --
+  usuario_id : INTEGER <<FK -> usuarios.id, NULL em falha de login>>
+  * acao : TEXT <<LOGIN_SUCESSO, OS_CRIADA, ETAPA_AVANCOU, ...>>
+  entidade : TEXT <<tabela relacionada>>
+  entidade_id : INTEGER
+  detalhes : TEXT <<JSON>>
+  ip : TEXT
+  user_agent : TEXT
+  * hash_anterior : TEXT <<hash do registro anterior ('GENESIS' no 1º)>>
+  * hash : TEXT <<UNIQUE, SHA-256 encadeado>>
+  * criada_em : TEXT <<datetime ISO>>
+  --
+  <i>append-only + hash encadeado: adulteração quebra a cadeia</i>
+}
+
+usuarios ||--o{ sessoes : "abre"
+usuarios ||--o{ conversas : "inicia"
+usuarios ||--o{ os : "solicita"
+usuarios ||--o{ auditoria : "gera eventos"
+conversas ||--o{ mensagens : "contém"
+conversas ||--o| os : "origina"
+mensagens ||--o| fotos : "anexa"
+os |o--o{ fotos : "evidencia"
+veiculos |o--o{ os : "objeto da"
+
+note bottom of auditoria
+  Integridade verificável em
+  GET /api/admin/auditoria/verificar
+end note
+
+note bottom of conversas
+  "fluxo" referencia o arquivo de fluxo
+  (server/flows/<Nome do item>.js),
+  não uma tabela — itens de menu são
+  código versionado, não dados.
+end note
+@enduml

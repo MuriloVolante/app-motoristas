@@ -1,14 +1,12 @@
 /* Service Worker — cache do app shell (PWA offline-first) */
 
-const CACHE = "portal-gbs-v2";
+const CACHE = "portal-gbs-v3";
 
 const ASSETS = [
   "./",
   "./index.html",
   "./css/styles.css",
-  "./js/data.js",
   "./js/chat.js",
-  "./js/flows.js",
   "./js/app.js",
   "./manifest.webmanifest",
   "./icons/icon.svg",
@@ -32,6 +30,8 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
+  // API e fotos sempre vão à rede — nunca servem do cache
+  if (new URL(event.request.url).pathname.startsWith("/api/")) return;
   event.respondWith(
     caches.match(event.request).then(
       (cached) =>
