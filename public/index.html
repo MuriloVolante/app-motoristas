@@ -137,13 +137,17 @@
 
   <!-- ============ NAVEGAÇÃO INFERIOR ============ -->
   <nav id="bottom-nav" class="bottom-nav" hidden aria-label="Navegação principal">
-    <button class="nav-item active" data-screen="home">
+    <div class="nav-bg" aria-hidden="true"></div>
+    <div id="nav-bubble" class="nav-bubble" aria-hidden="true">
+      <svg class="icon"><use id="nav-bubble-icon" href="#i-home"/></svg>
+    </div>
+    <button class="nav-item" data-screen="home" data-icon="home" aria-current="page">
       <svg class="icon nav-icon" aria-hidden="true"><use href="#i-home"/></svg><span>Home</span>
     </button>
-    <button class="nav-item" data-screen="perfil">
+    <button class="nav-item" data-screen="perfil" data-icon="user">
       <svg class="icon nav-icon" aria-hidden="true"><use href="#i-user"/></svg><span>Perfil</span>
     </button>
-    <button class="nav-item" data-screen="config">
+    <button class="nav-item" data-screen="config" data-icon="settings">
       <svg class="icon nav-icon" aria-hidden="true"><use href="#i-settings"/></svg><span>Ajustes</span>
     </button>
   </nav>

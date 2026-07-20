@@ -37,9 +37,10 @@ const App = {
     this.fluxos = await API.req("/api/fluxos");
     const container = document.getElementById("home-cards");
     container.innerHTML = "";
-    for (const f of this.fluxos) {
+    for (const [i, f] of this.fluxos.entries()) {
       const btn = document.createElement("button");
       btn.className = `card card-${f.cor}`;
+      btn.style.animationDelay = `${120 + i * 75}ms`; // entrada em cascata
       btn.innerHTML = `
         <span class="card-icon" aria-hidden="true"><svg class="icon"><use href="#i-${f.icone}"/></svg></span>
         <span class="card-text">
@@ -69,14 +70,21 @@ const App = {
 
   showScreen(name) {
     ["login", "home", "perfil", "config", "chat"].forEach((s) => {
-      document.getElementById("screen-" + s).hidden = s !== name;
+      const el = document.getElementById("screen-" + s);
+      if (s === name) {
+        if (el.hidden) {
+          el.hidden = false;
+          el.classList.remove("enter");
+          void el.offsetWidth; // reinicia a animação de entrada
+          el.classList.add("enter");
+        }
+      } else {
+        el.hidden = true;
+        el.classList.remove("enter");
+      }
     });
 
-    const nav = document.getElementById("bottom-nav");
-    nav.hidden = !["home", "perfil", "config"].includes(name);
-    nav.querySelectorAll(".nav-item").forEach((b) => {
-      b.classList.toggle("active", b.dataset.screen === name);
-    });
+    this.atualizarNav(name);
 
     if (name === "home" && this.usuario) {
       document.getElementById("home-greeting").textContent =
@@ -87,6 +95,36 @@ const App = {
       document.getElementById("perfil-matricula").textContent = "Matrícula: " + this.usuario.matricula;
     }
     window.scrollTo(0, 0);
+  },
+
+  /* Desliza o recorte + bolha da navbar até o item ativo */
+  atualizarNav(name) {
+    const nav = document.getElementById("bottom-nav");
+    nav.hidden = !["home", "perfil", "config"].includes(name);
+    if (nav.hidden) return;
+
+    const itens = [...nav.querySelectorAll(".nav-item")];
+    const idx = itens.findIndex((b) => b.dataset.screen === name);
+    if (idx < 0) return;
+
+    itens.forEach((b, i) => {
+      if (i === idx) b.setAttribute("aria-current", "page");
+      else b.removeAttribute("aria-current");
+    });
+
+    const xAntes = nav.style.getPropertyValue("--nav-x");
+    const xNovo = `${(((idx + 0.5) / itens.length) * 100).toFixed(3)}%`;
+    nav.style.setProperty("--nav-x", xNovo);
+
+    document.getElementById("nav-bubble-icon")
+      .setAttribute("href", "#i-" + itens[idx].dataset.icon);
+
+    if (xAntes && xAntes !== xNovo) {
+      const bolha = document.getElementById("nav-bubble");
+      bolha.classList.remove("pulse");
+      void bolha.offsetWidth;
+      bolha.classList.add("pulse");
+    }
   },
 
   /* ---------- eventos ---------- */
