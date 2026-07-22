@@ -89,7 +89,7 @@ module.exports = {
 
     confirmacao: {
       tipo: "fim",
-      expressao: "feliz",
+      expressao: "padrao",
       aoEntrar: (s, ctx, conversa) => {
         const { db, usuario } = ctx;
         const veiculo = buscarVeiculo(db, s.veiculoInput);

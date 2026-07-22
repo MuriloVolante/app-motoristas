@@ -28,7 +28,7 @@ module.exports = {
 
     registrado: {
       tipo: "fim",
-      expressao: "feliz",
+      expressao: "padrao",
       aoEntrar: (s, ctx, conversa) => {
         require("../audit").registrar({
           usuarioId: ctx.usuario.id, acao: "OUTRO_ASSUNTO_REGISTRADO",

@@ -1,6 +1,6 @@
 /* Service Worker — cache do app shell (PWA offline-first) */
 
-const CACHE = "assis-vg-v6";
+const CACHE = "assis-vg-v7";
 
 const ASSETS = [
   "./",
@@ -15,8 +15,7 @@ const ASSETS = [
   "./assets/assis/placeholder-padrao.svg",
   "./assets/assis/placeholder-fala.svg",
   "./assets/assis/placeholder-duvida.svg",
-  "./assets/assis/placeholder-triste.svg",
-  "./assets/assis/placeholder-feliz.svg"
+  "./assets/assis/placeholder-triste.svg"
 ];
 
 self.addEventListener("install", (event) => {

@@ -39,10 +39,9 @@ public/assets/assis/padrao.png      Sr. Assis pose padrão (hero da Home e avata
 public/assets/assis/fala.png        Sr. Assis falando (expressão padrão no diálogo)
 public/assets/assis/duvida.png      Sr. Assis com dúvida (perguntas e entradas rejeitadas)
 public/assets/assis/triste.png      Sr. Assis triste (cancelamento de atendimento)
-public/assets/assis/feliz.png       Sr. Assis feliz (conclusões com sucesso)
 ```
 
-Recomendação: PNG com fundo transparente, personagem enquadrado da cintura para cima, ~800px de altura. A expressão de cada etapa é definida no arquivo do fluxo pelo campo `expressao` (padrão: `fala`; erros usam `duvida`, cancelamento `triste`).
+Recomendação: PNG com fundo transparente, personagem enquadrado da cintura para cima, ~800px de altura. A expressão de cada etapa é definida no arquivo do fluxo pelo campo `expressao` (`padrao`, `fala`, `duvida` ou `triste`; padrão das etapas é `fala`, erros usam `duvida`, cancelamento `triste`, conclusões `padrao`).
 
 ## Como rodar
 
