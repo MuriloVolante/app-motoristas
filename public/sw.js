@@ -1,6 +1,6 @@
 /* Service Worker — cache do app shell (PWA offline-first) */
 
-const CACHE = "portal-gbs-v4";
+const CACHE = "assis-vg-v5";
 
 const ASSETS = [
   "./",
@@ -11,7 +11,12 @@ const ASSETS = [
   "./manifest.webmanifest",
   "./icons/icon.svg",
   "./icons/icon-192.png",
-  "./icons/icon-512.png"
+  "./icons/icon-512.png",
+  "./assets/assis/placeholder-padrao.svg",
+  "./assets/assis/placeholder-fala.svg",
+  "./assets/assis/placeholder-duvida.svg",
+  "./assets/assis/placeholder-triste.svg",
+  "./assets/assis/placeholder-feliz.svg"
 ];
 
 self.addEventListener("install", (event) => {

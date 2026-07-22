@@ -1,7 +1,7 @@
 /* ==========================================================================
-   Cliente da API + tela de chat.
-   Os fluxos rodam no servidor; este arquivo apenas apresenta as mensagens
-   e envia as entradas do usuário.
+   Cliente da API + palco de diálogo do Sr. Assis.
+   Os fluxos rodam no servidor; aqui apresentamos a fala do personagem
+   (com a expressão certa) e as opções de resposta, estilo diálogo de jogo.
    ========================================================================== */
 
 const API = {
@@ -30,7 +30,9 @@ const Chat = {
   init(onExit) {
     this.onExit = onExit;
     this.els = {
-      messages: document.getElementById("chat-messages"),
+      speech: document.getElementById("chat-speech"),
+      echo: document.getElementById("chat-echo"),
+      stageImg: document.getElementById("assis-stage"),
       options: document.getElementById("chat-options"),
       form: document.getElementById("chat-form"),
       input: document.getElementById("chat-input"),
@@ -44,7 +46,7 @@ const Chat = {
       const valor = this.els.input.value.trim();
       if (!valor || this.busy) return;
       this.els.input.value = "";
-      this.renderUser(valor);
+      this.mostrarEco(valor);
       this.enviar({ tipo: "texto", valor });
     });
 
@@ -52,7 +54,7 @@ const Chat = {
       const file = this.els.photoInput.files[0];
       if (!file) return;
       this.els.photoInput.value = "";
-      this.renderUserPhoto(URL.createObjectURL(file));
+      this.mostrarEcoFoto(URL.createObjectURL(file));
       this.enviarFoto(file);
     });
 
@@ -61,9 +63,11 @@ const Chat = {
 
   async start(fluxo) {
     this.conversaId = null;
-    this.els.messages.innerHTML = "";
+    this.els.speech.innerHTML = "";
     this.els.options.innerHTML = "";
+    this.els.echo.hidden = true;
     this.els.title.textContent = fluxo.titulo;
+    this.setExpressao("fala");
     this.setInputEnabled(false);
 
     try {
@@ -106,11 +110,15 @@ const Chat = {
     }
   },
 
-  /* Mostra o indicador "digitando" enquanto a requisição roda */
+  /* Limpa a fala e mostra o indicador "pensando" enquanto a requisição roda */
   async comIndicador(fn) {
     this.busy = true;
     this.els.options.innerHTML = "";
-    const typing = this.criarTyping();
+    this.els.speech.innerHTML = "";
+    const typing = document.createElement("div");
+    typing.className = "typing";
+    typing.innerHTML = "<span></span><span></span><span></span>";
+    this.els.speech.appendChild(typing);
     const inicio = Date.now();
     try {
       const saida = await fn();
@@ -123,30 +131,42 @@ const Chat = {
     }
   },
 
-  criarTyping() {
-    const typing = document.createElement("div");
-    typing.className = "bubble bubble-bot typing";
-    typing.innerHTML = "<span></span><span></span><span></span>";
-    this.els.messages.appendChild(typing);
-    this.scrollDown();
-    return typing;
+  /* ---------- palco ---------- */
+
+  /* Troca a expressão do Sr. Assis (arquivos em public/assets/assis/).
+     Se a imagem não existir, cai no placeholder ilustrado. */
+  setExpressao(nome) {
+    const img = this.els.stageImg;
+    if (img.dataset.expr === nome) return;
+    img.dataset.expr = nome;
+    img.classList.add("trocando");
+    setTimeout(() => {
+      img.onerror = () => {
+        img.onerror = null;
+        img.src = `assets/assis/placeholder-${nome}.svg`;
+      };
+      img.src = `assets/assis/${nome}.png`;
+      img.classList.remove("trocando");
+    }, 160);
   },
 
-  /* ---------- apresentação ---------- */
-
   async apresentar(saida) {
+    this.busy = true; // bloqueia entradas até a fala terminar de aparecer
     for (let i = 0; i < saida.mensagens.length; i++) {
-      if (i > 0) {
-        const typing = this.criarTyping();
-        await new Promise((r) => setTimeout(r, 420));
-        typing.remove();
-      }
-      this.bubble("bubble-bot", formatMsg(saida.mensagens[i].conteudo));
+      const m = saida.mensagens[i];
+      if (m.expressao) this.setExpressao(m.expressao);
+      if (i > 0) await new Promise((r) => setTimeout(r, 380));
+      const p = document.createElement("div");
+      p.className = "bubble-bot";
+      p.innerHTML = formatMsg(m.conteudo);
+      this.els.speech.appendChild(p);
+      this.els.speech.scrollTop = this.els.speech.scrollHeight;
     }
+    this.busy = false;
 
     if (saida.status === "cancelada") {
       this.setInputEnabled(false);
-      setTimeout(() => this.exit(), 1000);
+      setTimeout(() => this.exit(), 1100);
       return;
     }
 
@@ -164,30 +184,30 @@ const Chat = {
 
     if (entrada.tipo === "botoes") {
       this.setInputEnabled(true); // permite digitar "sair"
-      entrada.opcoes.forEach((o) => {
+      entrada.opcoes.forEach((o, i) => {
         this.addOptionButton(o, () => {
-          this.renderUser(o.label);
+          this.mostrarEco(o.label);
           this.enviar({ tipo: "opcao", valor: o.value });
-        });
+        }, i);
       });
       return;
     }
 
     if (entrada.tipo === "foto") {
       this.setInputEnabled(true);
-      this.addOptionButton({ label: "Tirar / anexar foto", wide: true }, () => this.els.photoInput.click());
+      this.addOptionButton({ label: "📷 Tirar / anexar foto", wide: true }, () => this.els.photoInput.click());
       this.addOptionButton({ label: "Voltar" }, () => {
-        this.renderUser("sair");
+        this.mostrarEco("sair");
         this.enviar({ tipo: "texto", valor: "sair" });
-      });
+      }, 1);
       return;
     }
 
-    // texto
+    // texto livre
     this.setInputEnabled(true);
     if (entrada.opcaoPular) {
       this.addOptionButton({ label: entrada.opcaoPular }, () => {
-        this.renderUser(entrada.opcaoPular);
+        this.mostrarEco(entrada.opcaoPular);
         this.enviar({ tipo: "opcao", valor: "" });
       });
     }
@@ -196,42 +216,31 @@ const Chat = {
 
   falha(e) {
     if (e.status === 401) { this.exit(); if (window.App) window.App.logout(true); return; }
-    this.bubble("bubble-bot", escapeHtml(e.message));
+    this.setExpressao("triste");
+    const p = document.createElement("div");
+    p.className = "bubble-bot";
+    p.textContent = e.message;
+    this.els.speech.appendChild(p);
     this.addOptionButton({ label: "Voltar ao menu", wide: true }, () => this.exit());
   },
 
-  /* ---------- renderização ---------- */
-
-  timestamp() {
-    return new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+  /* eco da resposta do motorista, no canto do palco */
+  mostrarEco(texto) {
+    this.els.echo.hidden = false;
+    this.els.echo.textContent = texto;
   },
 
-  scrollDown() {
-    this.els.messages.scrollTop = this.els.messages.scrollHeight;
+  mostrarEcoFoto(url) {
+    this.els.echo.hidden = false;
+    this.els.echo.innerHTML = `<img src="${url}" alt="Foto enviada" />`;
   },
 
-  bubble(cls, html) {
-    const div = document.createElement("div");
-    div.className = "bubble " + cls;
-    div.innerHTML = html + `<span class="bubble-time">${this.timestamp()}</span>`;
-    this.els.messages.appendChild(div);
-    this.scrollDown();
-    return div;
-  },
-
-  renderUser(texto) {
-    this.bubble("bubble-user", escapeHtml(texto));
-  },
-
-  renderUserPhoto(url) {
-    this.bubble("bubble-user", `<img class="bubble-photo" src="${url}" alt="Foto enviada" />`);
-  },
-
-  addOptionButton(opt, onClick) {
+  addOptionButton(opt, onClick, indice = 0) {
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "chat-option-btn" + (opt.wide ? " option-wide" : "");
     btn.textContent = opt.label;
+    btn.style.animationDelay = `${indice * 55}ms`;
     btn.addEventListener("click", () => {
       if (this.busy) return;
       onClick();
@@ -257,7 +266,7 @@ function escapeHtml(s) {
 function formatMsg(s) {
   let html = escapeHtml(s);
   html = html.replace(/\[tel:([^|]+)\|([^\]]+)\]/g,
-    '<a class="tel-link" href="tel:$1"><svg class="icon" style="width:18px;height:18px;vertical-align:-3px"><use href="#i-phone"/></svg> $2</a>');
+    '<a class="tel-link" href="tel:$1"><svg class="icon" style="width:17px;height:17px;vertical-align:-3px"><use href="#i-phone"/></svg> $2</a>');
   html = html.replace(/\*([^*\n]+)\*/g, "<b>$1</b>");
   return html;
 }

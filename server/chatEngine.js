@@ -55,10 +55,11 @@ function entrarEtapa(conversa, fluxo, etapaId, ctx, saida) {
 
   if (etapa.aoEntrar) etapa.aoEntrar(conversa.estadoObj, ctx, conversa);
 
+  const expressao = resolver(etapa.expressao, conversa.estadoObj, ctx) || "fala";
   const msgs = [].concat(resolver(etapa.mensagem, conversa.estadoObj, ctx));
   for (const m of msgs) {
     gravarMensagem(conversa.id, "bot", "texto", m, etapaId);
-    saida.mensagens.push({ autor: "bot", tipo: "texto", conteudo: m });
+    saida.mensagens.push({ autor: "bot", tipo: "texto", conteudo: m, expressao });
   }
 
   if (etapa.tipo === "fim") {
@@ -117,9 +118,9 @@ function processarEntrada(conversa, entrada, usuario) {
   const ctx = ctxDe(usuario);
   const saida = { conversaId: conversa.id, status: "ativa", mensagens: [], entrada: null };
 
-  const responderBot = (texto) => {
+  const responderBot = (texto, expressao = "duvida") => {
     gravarMensagem(conversa.id, "bot", "texto", texto, conversa.etapa_atual);
-    saida.mensagens.push({ autor: "bot", tipo: "texto", conteudo: texto });
+    saida.mensagens.push({ autor: "bot", tipo: "texto", conteudo: texto, expressao });
   };
 
   // grava a mensagem do usuário (fotos já foram gravadas pela rota de upload)
@@ -132,7 +133,7 @@ function processarEntrada(conversa, entrada, usuario) {
   if (entrada.tipo === "texto" && String(entrada.valor).trim().toLowerCase() === "sair") {
     const hist = conversa.estadoObj._hist || [];
     if (hist.length === 0) {
-      responderBot("Tudo bem, atendimento cancelado.\nVoltando ao menu principal…");
+      responderBot("Tudo bem, atendimento cancelado.\nVoltando ao menu principal…", "triste");
       finalizar(conversa, "cancelada");
       saida.status = "cancelada";
       audit.registrar({
@@ -143,14 +144,15 @@ function processarEntrada(conversa, entrada, usuario) {
     }
     const anterior = hist.pop();
     conversa.etapa_atual = anterior;
-    responderBot("Certo, voltando uma etapa.");
+    responderBot("Certo, voltando uma etapa.", "fala");
     audit.registrar({
       usuarioId: usuario.id, acao: "ETAPA_VOLTOU",
       entidade: "conversas", entidadeId: conversa.id, detalhes: { fluxo: fluxo.id, etapa: anterior }
     });
     // reapresenta a etapa anterior sem reexecutar aoEntrar
+    const expAnterior = resolver(fluxo.etapas[anterior].expressao, conversa.estadoObj, ctx) || "fala";
     const msgs = [].concat(resolver(fluxo.etapas[anterior].mensagem, conversa.estadoObj, ctx));
-    msgs.forEach(responderBot);
+    msgs.forEach((m) => responderBot(m, expAnterior));
     salvarEstado(conversa);
     saida.entrada = especificarEntrada(fluxo, anterior, conversa.estadoObj, ctx);
     return saida;

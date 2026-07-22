@@ -1,14 +1,14 @@
 {
-  "name": "Portal do Motorista — Grupo GBS",
-  "short_name": "Portal GBS",
+  "name": "Sr. Assis — Viação Garcia",
+  "short_name": "Sr. Assis",
   "description": "Portal de autoatendimento do motorista: contatos, pane e abertura de OS.",
   "lang": "pt-BR",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#12293F",
-  "theme_color": "#12293F",
+  "background_color": "#0F2A1E",
+  "theme_color": "#0F2A1E",
   "icons": [
     {
       "src": "icons/icon.svg",

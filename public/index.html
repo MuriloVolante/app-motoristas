@@ -3,12 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#12293F" />
-  <meta name="description" content="Portal de autoatendimento do motorista — Grupo GBS" />
-  <title>Portal do Motorista — Grupo GBS</title>
+  <meta name="theme-color" content="#0F2A1E" />
+  <meta name="description" content="Portal do motorista — Viação Garcia. O Sr. Assis está à disposição." />
+  <title>Sr. Assis — Viação Garcia</title>
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -19,13 +22,15 @@
     <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
     <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
     <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
+    <symbol id="i-message" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.51 4.04 3 5.5l7 7Z"/></symbol>
     <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol>
     <symbol id="i-user" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
     <symbol id="i-settings" viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></symbol>
     <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></symbol>
     <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></symbol>
     <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
-    <symbol id="i-bot" viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
     <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
   </svg>
@@ -33,18 +38,20 @@
   <!-- ============ TELA: LOGIN ============ -->
   <section id="screen-login" class="screen screen-login" hidden>
     <div class="login-box">
-      <div class="login-logo" aria-hidden="true">
-        <svg class="icon"><use href="#i-bus"/></svg>
+      <div class="brand brand-login">
+        <img src="assets/logo.png" alt="" class="brand-img"
+             onerror="this.hidden = true; this.nextElementSibling.hidden = false;" />
+        <span class="brand-mono" hidden>VG</span>
+        <span class="brand-nome">VIAÇÃO GARCIA</span>
       </div>
       <h1 class="login-title">Portal do Motorista</h1>
-      <p class="login-subtitle">GRUPO GBS</p>
+      <p class="login-subtitle">O Sr. Assis está à sua disposição.</p>
 
       <form id="login-form" autocomplete="off">
         <label class="field">
           <span class="field-label">Matrícula</span>
           <input id="login-matricula" type="text" inputmode="numeric"
-                 placeholder="Ex.: 12345" required
-                 aria-label="Matrícula" />
+                 placeholder="Ex.: 12345" required aria-label="Matrícula" />
         </label>
         <label class="field">
           <span class="field-label">Senha</span>
@@ -53,10 +60,10 @@
         </label>
 
         <div id="login-error" class="login-error" role="alert" hidden>
-          Matrícula ou senha inválida.<br />Verifique e tente novamente.
+          Matrícula ou senha inválida. Verifique e tente novamente.
         </div>
 
-        <button type="submit" class="btn-primary btn-big">Entrar</button>
+        <button type="submit" class="btn-cta btn-big">Entrar</button>
       </form>
 
       <p class="login-hint">Acesso restrito a motoristas cadastrados.<br />
@@ -67,18 +74,60 @@
 
   <!-- ============ TELA: HOME ============ -->
   <section id="screen-home" class="screen screen-home" hidden>
-    <header class="home-header">
-      <div>
-        <p class="home-greeting" id="home-greeting">Olá</p>
-        <p class="home-sub">Como podemos ajudar hoje?</p>
+
+    <header class="hero">
+      <div class="hero-top">
+        <div class="brand">
+          <img src="assets/logo.png" alt="" class="brand-img"
+               onerror="this.hidden = true; this.nextElementSibling.hidden = false;" />
+          <span class="brand-mono" hidden>VG</span>
+          <span class="brand-nome">VIAÇÃO GARCIA</span>
+        </div>
+        <button class="bell" aria-label="Notificações">
+          <svg class="icon"><use href="#i-bell"/></svg>
+          <span class="bell-badge" aria-hidden="true"></span>
+        </button>
       </div>
-      <button id="btn-logout" class="btn-icon" title="Sair" aria-label="Sair da conta">
-        <svg class="icon"><use href="#i-logout"/></svg>
-      </button>
+
+      <div class="hero-body">
+        <div class="hero-assis">
+          <img id="assis-hero" src="assets/assis/padrao.png" alt="Sr. Assis" />
+        </div>
+        <div class="hero-texto">
+          <h1 class="hero-ola">Olá,<br /><span id="home-greeting" class="verde">Motorista!</span></h1>
+          <p class="hero-sou">Eu sou o <b class="verde">Sr. Assis.</b></p>
+          <p class="hero-desc">Estou aqui para resolver o que você precisar na estrada: contatos, panes, ordens de serviço e muito mais.</p>
+          <div class="hero-pill">
+            <svg class="icon" aria-hidden="true"><use href="#i-message"/></svg>
+            <span>É só chamar,<br />estou à disposição!</span>
+          </div>
+        </div>
+      </div>
     </header>
 
     <!-- Cards gerados dinamicamente a partir de GET /api/fluxos -->
-    <main id="home-cards" class="home-cards" role="navigation" aria-label="Serviços"></main>
+    <main class="cards-sheet">
+      <div id="home-cards" class="cards-grid" role="navigation" aria-label="Serviços"></div>
+
+      <div class="banner-duvidas">
+        <img src="assets/assis/padrao.png" alt="" class="banner-avatar"
+             onerror="if (!this.dataset.fb) { this.dataset.fb = 1; this.src = 'assets/assis/placeholder-padrao.svg'; }" />
+        <div class="banner-texto">
+          <p class="banner-titulo">Ainda com dúvidas?</p>
+          <p class="banner-sub">O Sr. Assis responde na hora.</p>
+        </div>
+        <button id="btn-falar-assis" class="btn-cta btn-banner">
+          <svg class="icon" aria-hidden="true"><use href="#i-message"/></svg>
+          Falar com o Sr. Assis
+        </button>
+      </div>
+    </main>
+
+    <footer class="rodape">
+      <svg class="icon" aria-hidden="true"><use href="#i-bus"/></svg>
+      <p>Juntos, <span class="verde">levamos mais que</span> passageiros.</p>
+      <svg class="icon rodape-coracao" aria-hidden="true"><use href="#i-heart"/></svg>
+    </footer>
   </section>
 
   <!-- ============ TELA: PERFIL (placeholder) ============ -->
@@ -89,7 +138,7 @@
       <p class="profile-name" id="perfil-nome">—</p>
       <p class="profile-mat" id="perfil-matricula">—</p>
       <p class="placeholder-note">Mais opções de perfil em breve.</p>
-      <button id="btn-logout-perfil" class="btn-outline btn-big">Sair da conta</button>
+      <button id="btn-logout-perfil" class="btn-sair btn-big">Sair da conta</button>
     </main>
   </section>
 
@@ -102,29 +151,39 @@
     </main>
   </section>
 
-  <!-- ============ TELA: CHAT ============ -->
+  <!-- ============ TELA: CHAT (diálogo com o Sr. Assis) ============ -->
   <section id="screen-chat" class="screen screen-chat" hidden>
-    <header class="chat-header">
-      <button id="chat-back" class="btn-icon chat-back" aria-label="Voltar ao menu">
-        <svg class="icon"><use href="#i-arrow-left"/></svg>
-      </button>
-      <div class="chat-avatar" aria-hidden="true"><svg class="icon"><use href="#i-bot"/></svg></div>
-      <div class="chat-headtext">
-        <p class="chat-title" id="chat-title">Assistente GBS</p>
-        <p class="chat-status">
-          <span class="badge-biz" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>
-          Conta comercial · online
-        </p>
+
+    <!-- Palco: Sr. Assis + fala, sempre na metade superior -->
+    <div class="stage">
+      <div class="stage-top">
+        <button id="chat-back" class="btn-icon" aria-label="Voltar ao menu">
+          <svg class="icon"><use href="#i-arrow-left"/></svg>
+        </button>
+        <p class="stage-titulo" id="chat-title">Sr. Assis</p>
+        <span class="stage-status">
+          <span class="badge-biz"><svg class="icon"><use href="#i-check"/></svg></span> online
+        </span>
       </div>
-    </header>
 
-    <main id="chat-messages" class="chat-messages" aria-live="polite"></main>
+      <div class="stage-body">
+        <div class="stage-assis">
+          <img id="assis-stage" src="assets/assis/fala.png" alt="Sr. Assis"
+               onerror="if (!this.dataset.fb) { this.dataset.fb = 1; this.src = 'assets/assis/placeholder-fala.svg'; }" />
+        </div>
+        <div class="stage-fala">
+          <div id="chat-speech" class="speech" aria-live="polite"></div>
+          <div id="chat-echo" class="echo" hidden></div>
+        </div>
+      </div>
+    </div>
 
-    <div id="chat-options" class="chat-options" role="group" aria-label="Opções de resposta"></div>
+    <!-- Folha de diálogo: opções e entrada -->
+    <div class="dialog-sheet">
+      <div id="chat-options" class="chat-options" role="group" aria-label="Opções de resposta"></div>
 
-    <footer class="chat-footer">
       <form id="chat-form" class="chat-inputbar" autocomplete="off">
-        <input id="chat-input" type="text" placeholder="Digite uma mensagem"
+        <input id="chat-input" type="text" placeholder="Digite sua resposta"
                aria-label="Mensagem" />
         <button type="submit" class="chat-send" aria-label="Enviar">
           <svg class="icon"><use href="#i-send"/></svg>
@@ -132,7 +191,7 @@
       </form>
       <input id="chat-photo-input" type="file" accept="image/*" capture="environment" hidden />
       <p class="chat-hint">Digite <b>sair</b> para voltar uma etapa</p>
-    </footer>
+    </div>
   </section>
 
   <!-- ============ NAVEGAÇÃO INFERIOR ============ -->

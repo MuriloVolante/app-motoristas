@@ -13,7 +13,7 @@ function contatoSAM(db) {
 
 module.exports = {
   id: "pane",
-  descricao: "Problema com o veículo agora",
+  descricao: "Problema com o veículo agora? Acionamos o SAM para você.",
   icone: "alert",
   cor: "vermelho",
   ordem: 2,

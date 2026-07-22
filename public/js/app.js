@@ -11,8 +11,23 @@ const App = {
     this.bindLogin();
     this.bindNav();
 
-    document.getElementById("btn-logout").addEventListener("click", () => this.logout());
     document.getElementById("btn-logout-perfil").addEventListener("click", () => this.logout());
+
+    // Banner "Ainda com dúvidas?" abre o canal direto com o Sr. Assis
+    document.getElementById("btn-falar-assis").addEventListener("click", () => {
+      const f = this.fluxos.find((x) => x.id === "outros-assuntos") || this.fluxos[0];
+      if (!f) return;
+      this.showScreen("chat");
+      Chat.start(f);
+    });
+
+    // Fallback da imagem do hero enquanto os arquivos reais não são enviados
+    const heroImg = document.getElementById("assis-hero");
+    heroImg.onerror = () => {
+      heroImg.onerror = null;
+      heroImg.src = "assets/assis/placeholder-padrao.svg";
+    };
+    if (heroImg.complete && heroImg.naturalWidth === 0) heroImg.onerror();
 
     const token = localStorage.getItem("gbs_token");
     if (token) {
@@ -42,12 +57,10 @@ const App = {
       btn.className = `card card-${f.cor}`;
       btn.style.animationDelay = `${120 + i * 75}ms`; // entrada em cascata
       btn.innerHTML = `
-        <span class="card-icon" aria-hidden="true"><svg class="icon"><use href="#i-${f.icone}"/></svg></span>
-        <span class="card-text">
-          <span class="card-title">${escapeHtml(f.titulo)}</span>
-          <span class="card-desc">${escapeHtml(f.descricao)}</span>
-        </span>
-        <svg class="icon card-chevron" aria-hidden="true"><use href="#i-chevron-right"/></svg>`;
+        <span class="card-circulo" aria-hidden="true"><svg class="icon"><use href="#i-${f.icone}"/></svg></span>
+        <span class="card-titulo">${escapeHtml(f.titulo)}</span>
+        <span class="card-desc">${escapeHtml(f.descricao)}</span>
+        <span class="card-seta" aria-hidden="true"><svg class="icon"><use href="#i-chevron-right"/></svg></span>`;
       btn.addEventListener("click", () => {
         this.showScreen("chat");
         Chat.start(f);
@@ -88,7 +101,7 @@ const App = {
 
     if (name === "home" && this.usuario) {
       document.getElementById("home-greeting").textContent =
-        `${saudacao()}, ${primeiroNome(this.usuario.nome)}`;
+        `${primeiroNome(this.usuario.nome)}!`;
     }
     if (name === "perfil" && this.usuario) {
       document.getElementById("perfil-nome").textContent = this.usuario.nome;

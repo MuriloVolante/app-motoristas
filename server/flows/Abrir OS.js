@@ -13,9 +13,9 @@ function buscarVeiculo(db, texto) {
 
 module.exports = {
   id: "abrir-os",
-  descricao: "Registrar defeito do veículo",
+  descricao: "Registre um defeito do veículo e acompanhe pela manutenção.",
   icone: "wrench",
-  cor: "verde",
+  cor: "azul",
   ordem: 3,
 
   inicio: "veiculo",
@@ -89,6 +89,7 @@ module.exports = {
 
     confirmacao: {
       tipo: "fim",
+      expressao: "feliz",
       aoEntrar: (s, ctx, conversa) => {
         const { db, usuario } = ctx;
         const veiculo = buscarVeiculo(db, s.veiculoInput);

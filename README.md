@@ -29,6 +29,21 @@ docs/
 
 Crie um arquivo em `server/flows/` com o nome do item (ex.: `Troca de Turno.js`) exportando `{ descricao, icone, cor, ordem, inicio, etapas }` — use `Pane.js` como modelo. Reinicie o servidor: o card aparece na Home automaticamente, com todo o histórico e auditoria já funcionando. Nenhum outro arquivo precisa ser alterado.
 
+## Imagens do Sr. Assis e logo (envio manual)
+
+O visual usa arquivos em `public/assets/`. Enquanto eles não existirem, o app mostra placeholders ilustrados automaticamente — basta subir os arquivos com estes nomes exatos (minúsculos):
+
+```
+public/assets/logo.png              Logo da empresa (fundo transparente, aparece no topo do hero e no login)
+public/assets/assis/padrao.png      Sr. Assis pose padrão (hero da Home e avatar do banner)
+public/assets/assis/fala.png        Sr. Assis falando (expressão padrão no diálogo)
+public/assets/assis/duvida.png      Sr. Assis com dúvida (perguntas e entradas rejeitadas)
+public/assets/assis/triste.png      Sr. Assis triste (cancelamento de atendimento)
+public/assets/assis/feliz.png       Sr. Assis feliz (conclusões com sucesso)
+```
+
+Recomendação: PNG com fundo transparente, personagem enquadrado da cintura para cima, ~800px de altura. A expressão de cada etapa é definida no arquivo do fluxo pelo campo `expressao` (padrão: `fala`; erros usam `duvida`, cancelamento `triste`).
+
 ## Como rodar
 
 ```bash
