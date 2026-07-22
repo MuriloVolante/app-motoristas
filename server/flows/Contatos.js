@@ -8,7 +8,7 @@ const telefone = (t) => `[tel:${t.replace(/\D/g, "")}|${t}]`;
 
 module.exports = {
   id: "contatos",
-  descricao: "Telefones de Escalas e do Departamento Pessoal, por regional.",
+  descricao: "Escalas e Departamento Pessoal.",
   icone: "phone",
   cor: "verde",
   ordem: 1,

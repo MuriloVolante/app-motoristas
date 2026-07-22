@@ -72,6 +72,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 
 /* Coluna central no desktop — mesma base de código, moldura de app */
 @media (min-width: 700px) {
+  .hero-ola { font-size: 36px; }
   .screen, .bottom-nav {
     max-width: 480px;
     margin-left: auto;
@@ -208,7 +209,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 .hero {
   position: relative;
   color: #fff;
-  padding: 28px 24px 0;
+  padding: 20px 20px 0;
   background:
     radial-gradient(130% 100% at 90% 0%, rgba(140, 198, 63, .16), transparent 50%),
     linear-gradient(135deg, var(--verde-hero-1) 0%, var(--verde-hero-2) 60%, #14382a 100%);
@@ -262,13 +263,14 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   display: flex;
   align-items: flex-end;
   gap: 4px;
-  margin-top: 18px;
+  margin-top: 10px;
 }
 
 .hero-assis {
-  flex: 0 0 45%;
+  flex: 0 0 48%;
   align-self: flex-end;
-  margin-left: -12px;
+  margin-left: -14px;
+  min-width: 0;
 }
 .hero-assis img {
   display: block;
@@ -279,36 +281,20 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
   filter: drop-shadow(0 12px 20px rgba(0, 0, 0, .35));
 }
 
-.hero-texto { flex: 1; padding: 6px 0 28px; }
+.hero-texto { flex: 1; min-width: 0; padding: 4px 0 30px; }
 
 .hero-ola {
-  font-size: 36px;
+  font-size: clamp(26px, 8.5vw, 36px);
   font-weight: 700;
   line-height: 1.1;
-  text-wrap: balance;
+  overflow-wrap: anywhere;
 }
-.hero-sou { font-size: 19px; margin-top: 14px; }
-.hero-desc {
+.hero-sou { font-size: 17px; margin-top: 10px; }
+.hero-toque {
   font-size: 14px;
-  line-height: 1.55;
-  color: rgba(255, 255, 255, .88);
-  max-width: 320px;
-  margin-top: 12px;
+  color: rgba(255, 255, 255, .8);
+  margin-top: 6px;
 }
-
-.hero-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  border: 1px solid rgba(140, 198, 63, .5);
-  border-radius: 28px;
-  padding: 12px 18px;
-  margin-top: 22px;
-  background: rgba(0, 0, 0, .18);
-  font-size: 13px;
-  line-height: 1.35;
-}
-.hero-pill .icon { width: 20px; height: 20px; color: var(--verde-neon); }
 
 /* ============ HOME · CARDS ============ */
 .cards-sheet {
@@ -417,20 +403,6 @@ button { font: inherit; cursor: pointer; border: none; background: none; color: 
 .banner-sub { font-size: 13px; color: var(--ink-soft); }
 .btn-banner { padding: 11px 18px; font-size: 12px; }
 .btn-banner .icon { width: 17px; height: 17px; }
-
-/* ============ HOME · RODAPÉ ============ */
-.rodape {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background: var(--rodape-escuro);
-  color: #E4EBE6;
-  font-size: 13px;
-  padding: 22px 18px;
-}
-.rodape .icon { width: 21px; height: 21px; }
-.rodape-coracao { color: var(--verde-neon); width: 19px; height: 19px; }
 
 /* ============ TELAS SIMPLES (Perfil/Config) ============ */
 .screen-simple { padding-bottom: calc(var(--nav-h) + 12px); }

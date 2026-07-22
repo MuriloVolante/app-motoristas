@@ -13,7 +13,7 @@ function buscarVeiculo(db, texto) {
 
 module.exports = {
   id: "abrir-os",
-  descricao: "Registre um defeito do veículo e acompanhe pela manutenção.",
+  descricao: "Registrar defeito do veículo.",
   icone: "wrench",
   cor: "azul",
   ordem: 3,

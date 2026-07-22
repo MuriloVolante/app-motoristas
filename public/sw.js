@@ -1,6 +1,6 @@
 /* Service Worker — cache do app shell (PWA offline-first) */
 
-const CACHE = "assis-vg-v5";
+const CACHE = "assis-vg-v6";
 
 const ASSETS = [
   "./",

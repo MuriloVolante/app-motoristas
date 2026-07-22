@@ -6,7 +6,7 @@
 
 module.exports = {
   id: "outros-assuntos",
-  descricao: "Algo que não se encaixa nos outros cards? Fale com o Sr. Assis.",
+  descricao: "Qualquer outro assunto.",
   icone: "message",
   cor: "roxo",
   ordem: 4,
